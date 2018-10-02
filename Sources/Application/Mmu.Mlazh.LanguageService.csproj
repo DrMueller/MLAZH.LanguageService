@@ -8,7 +8,7 @@
     <Company>DrMueller</Company>
     <Product>MyLittleAzureHelpers.LanguageService</Product>
     <Description>DrMuellers little Azure Language Service</Description>
-    <PackageIconUrl>https://raw.githubusercontent.com/DrMueller/MLH.ApplicationExtensions/master/Sources/Application/Infrastructure/Assets/M.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/DrMueller/MLAZH.LanguageService/master/Sources/Application/M.png</PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <AssemblyVersion Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</AssemblyVersion>
     <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</FileVersion>
