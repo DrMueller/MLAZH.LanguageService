@@ -8,19 +8,20 @@ using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Serv
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants.Implementation;
 using StructureMap;
 
-namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.DepdendencyInjection
+namespace Mmu.Mlazh.LanguageService.Common.Infrastructure.DepdendencyInjection
 {
-    public class LanguageServiceTranslationsRegistry : Registry
+    public class TranslationsRegistry : Registry
     {
-        public LanguageServiceTranslationsRegistry()
+        public TranslationsRegistry()
         {
             Scan(
                 scanner =>
                 {
-                    scanner.AssemblyContainingType<LanguageServiceTranslationsRegistry>();
+                    scanner.AssemblyContainingType<TranslationsRegistry>();
                     scanner.WithDefaultConventions();
                 });
 
+            // Language-Service
             For<ITranslationService>().Use<TranslationService>().Singleton();
             For<IAuthorizationTokenFactory>().Use<AuthorizationTokenFactory>().Singleton();
             For<ITranslationApiProxy>().Use<TranslationApiProxy>().Singleton();

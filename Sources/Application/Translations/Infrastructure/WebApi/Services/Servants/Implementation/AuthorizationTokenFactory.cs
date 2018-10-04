@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Mmu.Mlazh.LanguageService.Translations.Infrastructure.Settings.Services;
 
 namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants.Implementation
 {
     internal class AuthorizationTokenFactory : IAuthorizationTokenFactory
     {
         private const string OcpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
-        private const string SubscriptionKey = "045dc19faafb43afa35dc34e033ef1fe";
         private readonly Uri _serviceUrl = new Uri("https://api.cognitive.microsoft.com/sts/v1.0/issueToken");
         private readonly IAuthorizationTokenCache _tokenCache;
+        private readonly ITranslationServiceSettingsProvider _settingsProvider;
 
-        public AuthorizationTokenFactory(IAuthorizationTokenCache tokenCache)
+        public AuthorizationTokenFactory(
+            IAuthorizationTokenCache tokenCache,
+            ITranslationServiceSettingsProvider settingsProvider)
         {
             _tokenCache = tokenCache;
+            _settingsProvider = settingsProvider;
         }
 
         public async Task<string> CreateAuthorizationTokenAsync()
@@ -37,8 +41,7 @@ namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.
                 request.Method = HttpMethod.Post;
                 request.RequestUri = _serviceUrl;
                 request.Content = new StringContent(string.Empty);
-                request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, SubscriptionKey);
-                client.Timeout = TimeSpan.FromSeconds(2);
+                request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, _settingsProvider.ProvideSettings().TranslateApiSubscriptionKey);
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
                 var token = await response.Content.ReadAsStringAsync();
