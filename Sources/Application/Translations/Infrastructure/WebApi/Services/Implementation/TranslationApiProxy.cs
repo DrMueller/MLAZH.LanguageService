@@ -5,20 +5,20 @@ using Mmu.Mlazh.LanguageService.Translations.Areas.Models;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Dtos;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Adapters;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.Services;
+using Mmu.Mlh.ApplicationExtensions.Areas.Rest.RestProxies;
 
 namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Implementation
 {
     internal class TranslationApiProxy : ITranslationApiProxy
     {
         private readonly IMapper _mapper;
-        private readonly IRestCallFactory _restCallFactory;
+        private readonly ITranslationRestCallFactory _restCallFactory;
         private readonly IRestProxy _restProxy;
         private readonly ITranslationResultAdapter _translationResultAdapter;
 
         public TranslationApiProxy(
             IRestProxy restProxy,
-            IRestCallFactory restCallFactory,
+            ITranslationRestCallFactory restCallFactory,
             IMapper mapper,
             ITranslationResultAdapter translationResultAdapter)
         {

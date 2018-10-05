@@ -14,7 +14,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0-preview2-35157" />
-    <PackageReference Include="Mmu.Mlh.ApplicationExtensions" Version="2.0.7" />
     <PackageReference Include="Mmu.Mlh.LanguageExtensions" Version="2.0.8" />
     <PackageReference Include="Mmu.Mlh.NetCoreExtensions" Version="2.0.2" />
   </ItemGroup>

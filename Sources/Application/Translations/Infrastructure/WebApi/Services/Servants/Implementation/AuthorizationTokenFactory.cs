@@ -1,23 +1,27 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.Settings.Services;
+using Mmu.Mlh.ApplicationExtensions.Areas.Rest.Models;
+using Mmu.Mlh.ApplicationExtensions.Areas.Rest.RestProxies;
 
 namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants.Implementation
 {
     internal class AuthorizationTokenFactory : IAuthorizationTokenFactory
     {
         private const string OcpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
+        private readonly IRestProxy _restProxy;
         private readonly Uri _serviceUrl = new Uri("https://api.cognitive.microsoft.com/sts/v1.0/issueToken");
-        private readonly IAuthorizationTokenCache _tokenCache;
         private readonly ITranslationServiceSettingsProvider _settingsProvider;
+        private readonly IAuthorizationTokenCache _tokenCache;
 
         public AuthorizationTokenFactory(
             IAuthorizationTokenCache tokenCache,
-            ITranslationServiceSettingsProvider settingsProvider)
+            ITranslationServiceSettingsProvider settingsProvider,
+            IRestProxy restProxy)
         {
             _tokenCache = tokenCache;
             _settingsProvider = settingsProvider;
+            _restProxy = restProxy;
         }
 
         public async Task<string> CreateAuthorizationTokenAsync()
@@ -35,20 +39,16 @@ namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.
 
         private async Task<string> FetchTokenAsync()
         {
-            using (var client = new HttpClient())
-            using (var request = new HttpRequestMessage())
-            {
-                request.Method = HttpMethod.Post;
-                request.RequestUri = _serviceUrl;
-                request.Content = new StringContent(string.Empty);
-                request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, _settingsProvider.ProvideSettings().TranslateApiSubscriptionKey);
-                var response = await client.SendAsync(request);
-                response.EnsureSuccessStatusCode();
-                var token = await response.Content.ReadAsStringAsync();
-                var result = "Bearer " + token;
+            var token = await _restProxy.PerformCallAsync<string>(
+                config => config
+                    .StartBuilding(_serviceUrl, RestCallMethodType.Post)
+                    .WithHeaders()
+                    .AddHeader(OcpApimSubscriptionKeyHeader, _settingsProvider.ProvideSettings().TranslateApiSubscriptionKey)
+                    .BuildHeaders()
+                    .Build());
 
-                return result;
-            }
+            var result = "Bearer " + token;
+            return result;
         }
     }
 }

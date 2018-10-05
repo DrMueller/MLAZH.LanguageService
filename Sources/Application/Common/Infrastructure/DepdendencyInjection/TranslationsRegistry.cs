@@ -25,7 +25,7 @@ namespace Mmu.Mlazh.LanguageService.Common.Infrastructure.DepdendencyInjection
             For<ITranslationService>().Use<TranslationService>().Singleton();
             For<IAuthorizationTokenFactory>().Use<AuthorizationTokenFactory>().Singleton();
             For<ITranslationApiProxy>().Use<TranslationApiProxy>().Singleton();
-            For<IRestCallFactory>().Use<RestCallFactory>().Singleton();
+            For<ITranslationRestCallFactory>().Use<TranslationRestCallFactory>().Singleton();
             For<IAuthorizationTokenCache>().Use<AuthorizationTokenCache>().Singleton();
             For<ITranslationResultAdapter>().Use<TranslationResultAdapter>().Singleton();
         }

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Mmu.Mlazh.LanguageService.Translations.Areas.Models;
 using Mmu.Mlazh.LanguageService.Translations.Areas.Services;
 using Mmu.Mlh.ApplicationExtensions.Areas.DependencyInjection.Models;
@@ -17,8 +15,6 @@ namespace Mmu.Mlazh.LanguageService.TestConsole
     {
         private static Dictionary<ConsoleKey, Action> _inputs;
         private static ITranslationService _service;
-
-        public static IConfigurationRoot Configuration;
 
         private static void EvaluateInput()
         {
