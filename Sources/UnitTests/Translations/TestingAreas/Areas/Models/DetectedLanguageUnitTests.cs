@@ -13,13 +13,13 @@ namespace Mmu.Mlazh.LanguageService.UnitTests.Translations.TestingAreas.Areas.Mo
             const string LanguageCode = "en";
             const float AccuracyBetweenOneAndZero = 0.5F;
 
-            CtorTestBuilderFactory.ForType<DetectedLanguage>()
-                .ForDefaultConstructor()
+            ConstructorTestBuilderFactory.Constructing<DetectedLanguage>()
+                .UsingDefaultConstructor()
                 .WithArgumentValues(null, AccuracyBetweenOneAndZero).Fails()
                 .WithArgumentValues(LanguageCode, AccuracyBetweenOneAndZero)
-                .MapsToProperty(f => f.AccuracyBetweenOneAndZero).WithValue(AccuracyBetweenOneAndZero)
-                .MapsToProperty(f => f.LanguageCode).WithValue(LanguageCode)
-                .Succeeds()
+                .Maps()
+                .ToProperty(f => f.AccuracyBetweenOneAndZero).WithValue(AccuracyBetweenOneAndZero)
+                .ToProperty(f => f.LanguageCode).WithValue(LanguageCode)
                 .Build()
                 .Assert();
         }

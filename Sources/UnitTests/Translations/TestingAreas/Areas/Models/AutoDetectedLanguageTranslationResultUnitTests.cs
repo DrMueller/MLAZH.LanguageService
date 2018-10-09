@@ -14,15 +14,15 @@ namespace Mmu.Mlazh.LanguageService.UnitTests.Translations.TestingAreas.Areas.Mo
             var targetLanguageCodes = new List<string> { "en" };
             var textParts = new List<string> { "Hello" };
 
-            CtorTestBuilderFactory.ForType<AutoDetectLanguageTranslationRequest>()
-                .ForDefaultConstructor()
+            ConstructorTestBuilderFactory.Constructing<AutoDetectLanguageTranslationRequest>()
+                .UsingDefaultConstructor()
                 .WithArgumentValues(targetLanguageCodes, null).Fails()
                 .WithArgumentValues(null, textParts).Fails()
                 .WithArgumentValues(targetLanguageCodes, textParts).Succeeds()
                 .WithArgumentValues(targetLanguageCodes, textParts)
-                .MapsToProperty(f => f.TargetLanguageCodes).WithValue(targetLanguageCodes)
-                .MapsToProperty(f => f.TextParts).WithValue(textParts)
-                .Succeeds()
+                .Maps()
+                .ToProperty(f => f.TargetLanguageCodes).WithValue(targetLanguageCodes)
+                .ToProperty(f => f.TextParts).WithValue(textParts)
                 .Build()
                 .Assert();
         }

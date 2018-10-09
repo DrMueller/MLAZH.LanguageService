@@ -13,14 +13,14 @@ namespace Mmu.Mlazh.LanguageService.UnitTests.Translations.TestingAreas.Areas.Mo
             const string Text = "Hello";
             const string TargetLanguageCode = "En";
 
-            CtorTestBuilderFactory.ForType<Translation>()
-                .ForDefaultConstructor()
+            ConstructorTestBuilderFactory.Constructing<Translation>()
+                .UsingDefaultConstructor()
                 .WithArgumentValues(null, Text).Fails()
                 .WithArgumentValues(TargetLanguageCode, null).Succeeds()
                 .WithArgumentValues(TargetLanguageCode, Text)
-                .MapsToProperty(f => f.TargetLanguageCode).WithValue(TargetLanguageCode)
-                .MapsToProperty(f => f.Text).WithValue(Text)
-                .Succeeds()
+                .Maps()
+                .ToProperty(f => f.TargetLanguageCode).WithValue(TargetLanguageCode)
+                .ToProperty(f => f.Text).WithValue(Text)
                 .Build()
                 .Assert();
         }

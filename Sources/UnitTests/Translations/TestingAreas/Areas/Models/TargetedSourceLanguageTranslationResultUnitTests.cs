@@ -15,11 +15,12 @@ namespace Mmu.Mlazh.LanguageService.UnitTests.Translations.TestingAreas.Areas.Mo
                 new Translation("Test", "en")
             };
 
-            CtorTestBuilderFactory.ForType<TargetedSourceLanguageTranslationResult>()
-                .ForDefaultConstructor()
+            ConstructorTestBuilderFactory.Constructing<TargetedSourceLanguageTranslationResult>()
+                .UsingDefaultConstructor()
                 .WithArgumentValues(null).Fails()
                 .WithArgumentValues(translations).Succeeds()
-                .WithArgumentValues(translations).MapsToProperty(f => f.Translations).WithValue(translations).Succeeds()
+                .WithArgumentValues(translations).Maps()
+                .ToProperty(f => f.Translations).WithValue(translations)
                 .Build()
                 .Assert();
         }
