@@ -21,7 +21,7 @@ namespace Mmu.Mlazh.LanguageService.UnitTests.Translations.TestingAreas.Areas.Mo
                 .Maps()
                 .ToProperty(f => f.TargetLanguageCode).WithValue(TargetLanguageCode)
                 .ToProperty(f => f.Text).WithValue(Text)
-                .Build()
+                .BuildMaps()
                 .Assert();
         }
     }

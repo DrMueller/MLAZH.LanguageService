@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Dtos;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.Models;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.Models.Security;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.RestCallBuilding;
+using Mmu.Mlh.RestExtensions.Areas.Models;
+using Mmu.Mlh.RestExtensions.Areas.Models.Security;
+using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 
 namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants.Implementation
 {
@@ -30,9 +30,9 @@ namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.
 
             return _restCallBuilderFactory
                 .StartBuilding(_translationBaseUrl, RestCallMethodType.Post)
-                .WithouthResourcePath(resourcePath)
+                .WithResourcePath(resourcePath)
                 .WithSecurity(RestSecurity.CreateTokenSecurity(token))
-                .WithBody(request.Entries)
+                .WithBody(new RestCallBody(request.Entries))
                 .Build();
         }
 

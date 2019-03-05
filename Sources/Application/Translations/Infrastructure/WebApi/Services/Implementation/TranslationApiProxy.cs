@@ -5,7 +5,7 @@ using Mmu.Mlazh.LanguageService.Translations.Areas.Models;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Dtos;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Adapters;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.RestProxies;
+using Mmu.Mlh.RestExtensions.Areas.RestProxies;
 
 namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Implementation
 {

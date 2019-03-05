@@ -20,7 +20,7 @@ namespace Mmu.Mlazh.LanguageService.UnitTests.Translations.TestingAreas.Areas.Mo
                 .Maps()
                 .ToProperty(f => f.AccuracyBetweenOneAndZero).WithValue(AccuracyBetweenOneAndZero)
                 .ToProperty(f => f.LanguageCode).WithValue(LanguageCode)
-                .Build()
+                .BuildMaps()
                 .Assert();
         }
     }

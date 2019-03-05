@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.Settings.Services;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.Models;
-using Mmu.Mlh.ApplicationExtensions.Areas.Rest.RestProxies;
+using Mmu.Mlh.RestExtensions.Areas.Models;
+using Mmu.Mlh.RestExtensions.Areas.RestProxies;
 
 namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Services.Servants.Implementation
 {

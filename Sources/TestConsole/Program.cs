@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mmu.Mlazh.LanguageService.Translations.Areas.Models;
 using Mmu.Mlazh.LanguageService.Translations.Areas.Services;
-using Mmu.Mlh.ApplicationExtensions.Areas.DependencyInjection.Models;
-using Mmu.Mlh.ApplicationExtensions.Areas.DependencyInjection.Services;
-using Mmu.Mlh.ApplicationExtensions.Areas.ServiceProvisioning;
+using Mmu.Mlh.ServiceProvisioning.Areas.Initialization.Models;
+using Mmu.Mlh.ServiceProvisioning.Areas.Initialization.Services;
+using Mmu.Mlh.ServiceProvisioning.Areas.Provisioning.Services;
 
 namespace Mmu.Mlazh.LanguageService.TestConsole
 {
@@ -26,9 +26,9 @@ namespace Mmu.Mlazh.LanguageService.TestConsole
         private static void Main()
         {
             ContainerInitializationService.CreateInitializedContainer(
-                new AssemblyParameters(typeof(Program).Assembly, "Mmu.Mlazh.LanguageService"));
+                new ContainerConfiguration(typeof(Program).Assembly, "Mmu.Mlazh.LanguageService", true));
 
-            _service = ProvisioningServiceSingleton.Instance.GetService<ITranslationService>();
+            _service = ServiceLocatorSingleton.Instance.GetService<ITranslationService>();
 
             _inputs = new Dictionary<ConsoleKey, Action>
             {

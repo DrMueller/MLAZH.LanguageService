@@ -1,6 +1,7 @@
 ﻿using Mmu.Mlazh.LanguageService.TestConsole.Infrastructure.Settings.Models;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.Settings.Models;
 using Mmu.Mlazh.LanguageService.Translations.Infrastructure.Settings.Services;
+using Mmu.Mlh.SettingsProvisioning.Areas.Factories;
 
 namespace Mmu.Mlazh.LanguageService.TestConsole.Infrastructure.Settings.Services
 {
@@ -8,9 +9,12 @@ namespace Mmu.Mlazh.LanguageService.TestConsole.Infrastructure.Settings.Services
     {
         private readonly TestConsoleAppSettings _appSettings;
 
-        public TranslationServiceSettingsProvider(TestConsoleAppSettings appSettings)
+        public TranslationServiceSettingsProvider(ISettingsFactory settingsFactory)
         {
-            _appSettings = appSettings;
+            _appSettings = settingsFactory.CreateSettings<TestConsoleAppSettings>(
+                "AppSettings",
+                string.Empty,
+                typeof(TranslationServiceSettingsProvider).Assembly.CodeBase);
         }
 
         public TranslationServiceSettings ProvideSettings()
