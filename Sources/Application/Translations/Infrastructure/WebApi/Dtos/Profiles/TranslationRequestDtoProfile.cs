@@ -30,7 +30,7 @@ namespace Mmu.Mlazh.LanguageService.Translations.Infrastructure.WebApi.Dtos.Prof
                             {
                                 Text = g
                             }).ToList()))
-                .ForMember(d => d.SourceLanguageCodes, c => c.UseValue(new List<string>()))
+                .ForMember(d => d.SourceLanguageCodes, c => c.MapFrom(f => new List<string>()))
                 .ForMember(d => d.TargetLanguageCodes, c => c.MapFrom(f => f.TargetLanguageCodes));
         }
     }
